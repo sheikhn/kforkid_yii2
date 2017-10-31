@@ -11,10 +11,7 @@ use Yii;
  * @property string $name
  * @property string $address
  * @property integer $contact
- * @property integer $school_infra_id
  * @property integer $rating
- * @property integer $school_level_id
- * @property integer $school_syllabus_id
  * @property integer $studentratio
  * @property integer $teacherratio
  * @property integer $classroom
@@ -27,8 +24,12 @@ use Yii;
  * @property integer $teachermaleratio
  * @property integer $teacherfemaleratio
  * @property integer $minoritystudents
- * @property integer $school_cca_id
  * @property integer $avgyearlycost
+ *
+ * @property SchooldetailsCca[] $schooldetailsCcas
+ * @property SchooldetailsInfra[] $schooldetailsInfras
+ * @property SchooldetailsLevel[] $schooldetailsLevels
+ * @property SchooldetailsSyllabus[] $schooldetailsSyllabi
  */
 class SchoolDetails extends \yii\db\ActiveRecord
 {
@@ -46,8 +47,8 @@ class SchoolDetails extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'address', 'contact', 'school_infra_id', 'rating', 'school_level_id', 'school_syllabus_id', 'studentratio', 'teacherratio', 'classroom', 'totalstudents', 'playgroundsize', 'campussize', 'sslcfirstclass', 'studentmaleratio', 'studentfemaleratio', 'teachermaleratio', 'teacherfemaleratio', 'minoritystudents', 'school_cca_id', 'avgyearlycost'], 'required'],
-            [['contact', 'school_infra_id', 'rating', 'school_level_id', 'school_syllabus_id', 'studentratio', 'teacherratio', 'classroom', 'totalstudents', 'playgroundsize', 'campussize', 'sslcfirstclass', 'studentmaleratio', 'studentfemaleratio', 'teachermaleratio', 'teacherfemaleratio', 'minoritystudents', 'school_cca_id', 'avgyearlycost'], 'integer'],
+            [['name', 'address', 'contact', 'rating', 'studentratio', 'teacherratio', 'classroom', 'totalstudents', 'playgroundsize', 'campussize', 'sslcfirstclass', 'studentmaleratio', 'studentfemaleratio', 'teachermaleratio', 'teacherfemaleratio', 'minoritystudents', 'avgyearlycost'], 'required'],
+            [['contact', 'rating', 'studentratio', 'teacherratio', 'classroom', 'totalstudents', 'playgroundsize', 'campussize', 'sslcfirstclass', 'studentmaleratio', 'studentfemaleratio', 'teachermaleratio', 'teacherfemaleratio', 'minoritystudents', 'avgyearlycost'], 'integer'],
             [['name', 'address'], 'string', 'max' => 100],
         ];
     }
@@ -62,10 +63,7 @@ class SchoolDetails extends \yii\db\ActiveRecord
             'name' => 'Name',
             'address' => 'Address',
             'contact' => 'Contact',
-            'school_infra_id' => 'School Infra ID',
             'rating' => 'Rating',
-            'school_level_id' => 'School Level ID',
-            'school_syllabus_id' => 'School Syllabus ID',
             'studentratio' => 'Studentratio',
             'teacherratio' => 'Teacherratio',
             'classroom' => 'Classroom',
@@ -78,8 +76,39 @@ class SchoolDetails extends \yii\db\ActiveRecord
             'teachermaleratio' => 'Teachermaleratio',
             'teacherfemaleratio' => 'Teacherfemaleratio',
             'minoritystudents' => 'Minoritystudents',
-            'school_cca_id' => 'School Cca ID',
             'avgyearlycost' => 'Avgyearlycost',
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getSchooldetailsCcas()
+    {
+        return $this->hasMany(SchooldetailsCca::className(), ['school_details_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getSchooldetailsInfras()
+    {
+        return $this->hasMany(SchooldetailsInfra::className(), ['school_details_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getSchooldetailsLevels()
+    {
+        return $this->hasMany(SchooldetailsLevel::className(), ['school_details_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getSchooldetailsSyllabi()
+    {
+        return $this->hasMany(SchooldetailsSyllabus::className(), ['school_details_id' => 'id']);
     }
 }

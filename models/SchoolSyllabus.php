@@ -10,6 +10,9 @@ use Yii;
  * @property integer $id
  * @property string $syllabus
  * @property integer $state_id
+ *
+ * @property States $state
+ * @property SchooldetailsSyllabus[] $schooldetailsSyllabi
  */
 class SchoolSyllabus extends \yii\db\ActiveRecord
 {
@@ -29,7 +32,9 @@ class SchoolSyllabus extends \yii\db\ActiveRecord
         return [
             [['syllabus'], 'required'],
             [['state_id'], 'integer'],
-            [['syllabus'], 'string', 'max' => 100],
+            [['syllabus'], 'string', 'max' => 75],
+            [['state_id'], 'unique'],
+            [['state_id'], 'exist', 'skipOnError' => true, 'targetClass' => States::className(), 'targetAttribute' => ['state_id' => 'id']],
         ];
     }
 
@@ -43,5 +48,21 @@ class SchoolSyllabus extends \yii\db\ActiveRecord
             'syllabus' => 'Syllabus',
             'state_id' => 'State ID',
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getState()
+    {
+        return $this->hasOne(States::className(), ['id' => 'state_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getSchooldetailsSyllabi()
+    {
+        return $this->hasMany(SchooldetailsSyllabus::className(), ['school_syllabus_id' => 'id']);
     }
 }

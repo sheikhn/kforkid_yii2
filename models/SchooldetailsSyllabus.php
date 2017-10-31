@@ -5,24 +5,24 @@ namespace app\models;
 use Yii;
 
 /**
- * This is the model class for table "schooldetails_cca".
+ * This is the model class for table "schooldetails_syllabus".
  *
  * @property integer $id
  * @property integer $school_details_id
- * @property integer $school_cca_id
+ * @property integer $school_syllabus_id
  * @property integer $value
  *
  * @property SchoolDetails $schoolDetails
- * @property SchoolCca $schoolCca
+ * @property SchoolSyllabus $schoolSyllabus
  */
-class SchoolCca extends \yii\db\ActiveRecord
+class SchooldetailsSyllabus extends \yii\db\ActiveRecord
 {
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
-        return 'schooldetails_cca';
+        return 'schooldetails_syllabus';
     }
 
     /**
@@ -31,10 +31,10 @@ class SchoolCca extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['school_details_id', 'school_cca_id', 'value'], 'required'],
-            [['school_details_id', 'school_cca_id', 'value'], 'integer'],
+            [['school_details_id', 'school_syllabus_id'], 'required'],
+            [['school_details_id', 'school_syllabus_id', 'value'], 'integer'],
             [['school_details_id'], 'exist', 'skipOnError' => true, 'targetClass' => SchoolDetails::className(), 'targetAttribute' => ['school_details_id' => 'id']],
-            [['school_cca_id'], 'exist', 'skipOnError' => true, 'targetClass' => SchoolCca::className(), 'targetAttribute' => ['school_cca_id' => 'id']],
+            [['school_syllabus_id'], 'exist', 'skipOnError' => true, 'targetClass' => SchoolSyllabus::className(), 'targetAttribute' => ['school_syllabus_id' => 'id']],
         ];
     }
 
@@ -46,7 +46,7 @@ class SchoolCca extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'school_details_id' => 'School Details ID',
-            'school_cca_id' => 'School Cca ID',
+            'school_syllabus_id' => 'School Syllabus ID',
             'value' => 'Value',
         ];
     }
@@ -62,8 +62,8 @@ class SchoolCca extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getSchoolCca()
+    public function getSchoolSyllabus()
     {
-        return $this->hasOne(SchoolCca::className(), ['id' => 'school_cca_id']);
+        return $this->hasOne(SchoolSyllabus::className(), ['id' => 'school_syllabus_id']);
     }
 }

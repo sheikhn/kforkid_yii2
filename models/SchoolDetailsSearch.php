@@ -18,7 +18,7 @@ class SchoolDetailsSearch extends SchoolDetails
     public function rules()
     {
         return [
-            [['id', 'contact', 'school_infra_id', 'rating', 'school_level_id', 'school_syllabus_id', 'studentratio', 'teacherratio', 'classroom', 'totalstudents', 'playgroundsize', 'campussize', 'sslcfirstclass', 'studentmaleratio', 'studentfemaleratio', 'teachermaleratio', 'teacherfemaleratio', 'minoritystudents', 'school_cca_id', 'avgyearlycost'], 'integer'],
+            [['id', 'contact', 'rating', 'studentratio', 'teacherratio', 'classroom', 'totalstudents', 'playgroundsize', 'campussize', 'sslcfirstclass', 'studentmaleratio', 'studentfemaleratio', 'teachermaleratio', 'teacherfemaleratio', 'minoritystudents', 'avgyearlycost'], 'integer'],
             [['name', 'address'], 'safe'],
         ];
     }
@@ -61,10 +61,7 @@ class SchoolDetailsSearch extends SchoolDetails
         $query->andFilterWhere([
             'id' => $this->id,
             'contact' => $this->contact,
-            'school_infra_id' => $this->school_infra_id,
             'rating' => $this->rating,
-            'school_level_id' => $this->school_level_id,
-            'school_syllabus_id' => $this->school_syllabus_id,
             'studentratio' => $this->studentratio,
             'teacherratio' => $this->teacherratio,
             'classroom' => $this->classroom,
@@ -77,7 +74,6 @@ class SchoolDetailsSearch extends SchoolDetails
             'teachermaleratio' => $this->teachermaleratio,
             'teacherfemaleratio' => $this->teacherfemaleratio,
             'minoritystudents' => $this->minoritystudents,
-            'school_cca_id' => $this->school_cca_id,
             'avgyearlycost' => $this->avgyearlycost,
         ]);
 
