@@ -18,20 +18,18 @@ $this->params['breadcrumbs'][] = $this->title;
     <p>
         <?= Html::a('Create School Details', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
+
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
+            //'id',
             'name',
             'address',
             'contact',
-            'school_infra_id',
-            // 'rating',
-            // 'school_level_id',
-            // 'school_syllabus_id',
+            //'rating',
             // 'studentratio',
             // 'teacherratio',
             // 'classroom',
@@ -44,7 +42,6 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'teachermaleratio',
             // 'teacherfemaleratio',
             // 'minoritystudents',
-            // 'school_cca_id',
             // 'avgyearlycost',
 
             ['class' => 'yii\grid\ActionColumn'],

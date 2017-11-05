@@ -5,24 +5,24 @@ namespace app\models;
 use Yii;
 
 /**
- * This is the model class for table "schooldetails_level".
+ * This is the model class for table "schooldetails_cca".
  *
  * @property integer $id
  * @property integer $school_details_id
- * @property integer $school_level_id
+ * @property integer $school_cca_id
  * @property integer $value
  *
  * @property SchoolDetails $schoolDetails
- * @property SchoolLevel $schoolLevel
+ * @property SchoolCca $schoolCca
  */
-class SchooldetailsLevel extends \yii\db\ActiveRecord
+class SchooldetailsCca extends \yii\db\ActiveRecord
 {
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
-        return 'schooldetails_level';
+        return 'schooldetails_cca';
     }
 
     /**
@@ -31,10 +31,10 @@ class SchooldetailsLevel extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['school_details_id', 'school_level_id'], 'required'],
-            [['school_details_id', 'school_level_id', 'value'], 'integer'],
+            [['school_details_id', 'school_cca_id'], 'required'],
+            [['school_details_id', 'school_cca_id'], 'integer'],
             [['school_details_id'], 'exist', 'skipOnError' => true, 'targetClass' => SchoolDetails::className(), 'targetAttribute' => ['school_details_id' => 'id']],
-            [['school_level_id'], 'exist', 'skipOnError' => true, 'targetClass' => SchoolLevel::className(), 'targetAttribute' => ['school_level_id' => 'id']],
+            [['school_cca_id'], 'exist', 'skipOnError' => true, 'targetClass' => SchoolCca::className(), 'targetAttribute' => ['school_cca_id' => 'id']],
         ];
     }
 
@@ -45,8 +45,8 @@ class SchooldetailsLevel extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'school_details_id' => 'School Name',
-            'school_level_id' => 'School Level',
+            'school_details_id' => 'School Details ID',
+            'school_cca_id' => 'School Cca ID',
             'value' => 'Value',
         ];
     }
@@ -62,8 +62,8 @@ class SchooldetailsLevel extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getSchoolLevel()
+    public function getSchoolCca()
     {
-        return $this->hasOne(SchoolLevel::className(), ['id' => 'school_level_id']);
+        return $this->hasOne(SchoolCca::className(), ['id' => 'school_cca_id']);
     }
 }

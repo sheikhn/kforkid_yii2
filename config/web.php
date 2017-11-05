@@ -45,6 +45,7 @@ $config = [
             'showScriptName' => false,
             'rules' => [
                 '<api>/<controller:\w+>/<id:\d+>' => 'api/<controller>/view',
+                '<controller:\w+>/<action:\w+>/<school_details_id:\d+>' => '<controller>/<action>'
             ],
         ],
         
@@ -66,6 +67,9 @@ if (YII_ENV_DEV) {
         'class' => 'yii\gii\Module',
         // uncomment the following to add your IP if you are not connecting from localhost.
         //'allowedIPs' => ['127.0.0.1', '::1'],
+    ];
+    $config['modules']["gridview"] = [
+            'class' => '\kartik\grid\Module'
     ];
 }
 

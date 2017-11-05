@@ -4,6 +4,11 @@ namespace app\controllers;
 
 use Yii;
 use app\models\SchoolDetails;
+use app\models\SchooldetailsCcaSearch;
+use app\models\SchooldetailsInfraSearch;
+use app\models\SchooldetailsLevelSearch;
+use app\models\SchooldetailsSyllabusSearch;
+
 use app\models\SchoolDetailsSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -51,8 +56,33 @@ class SchoolDetailsController extends Controller
      */
     public function actionView($id)
     {
+         $ccaSearchModel = new SchooldetailsCcaSearch();
+        $ccaSearchModel->school_details_id = $id;
+        $ccaDataProvider = $ccaSearchModel->search([]);
+
+        $infraSearchModel = new SchooldetailsInfraSearch();
+        $infraSearchModel->school_details_id = $id;
+        $infraDataProvider = $infraSearchModel->search([]);
+
+         $levelSearchModel = new SchooldetailsLevelSearch();
+        $levelSearchModel->school_details_id = $id;
+        $levelDataProvider = $levelSearchModel->search([]);
+
+         $syllabusSearchModel = new SchooldetailsSyllabusSearch();
+        $syllabusSearchModel->school_details_id = $id;
+        $syllabusDataProvider = $syllabusSearchModel->search([]);
+
+
         return $this->render('view', [
             'model' => $this->findModel($id),
+             'ccaSearchModel' => $ccaSearchModel,
+            'ccaDataProvider' => $ccaDataProvider,
+            'infraSearchModel' => $infraSearchModel,
+            'infraDataProvider' => $infraDataProvider,
+            'levelSearchModel' => $levelSearchModel,
+            'levelDataProvider' => $levelDataProvider,
+            'syllabusSearchModel' => $syllabusSearchModel,
+            'syllabusDataProvider' => $syllabusDataProvider,
         ]);
     }
 
@@ -64,9 +94,10 @@ class SchoolDetailsController extends Controller
     public function actionCreate()
     {
         $model = new SchoolDetails();
-
+            
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+                return $this->redirect(['/schooldetails-level/create', 'school_details_id' => $model->id ]);
+            //return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -85,7 +116,7 @@ class SchoolDetailsController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['/schooldetails-level/index', 'school_details_id' => $model->id]);
         } else {
             return $this->render('update', [
                 'model' => $model,

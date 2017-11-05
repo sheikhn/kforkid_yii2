@@ -18,13 +18,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'contact')->textInput() ?>
 
-    <?= $form->field($model, 'school_infra_id')->textInput() ?>
-
     <?= $form->field($model, 'rating')->textInput() ?>
-
-    <?= $form->field($model, 'school_level_id')->textInput() ?>
-
-    <?= $form->field($model, 'school_syllabus_id')->textInput() ?>
 
     <?= $form->field($model, 'studentratio')->textInput() ?>
 
@@ -49,8 +43,6 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'teacherfemaleratio')->textInput() ?>
 
     <?= $form->field($model, 'minoritystudents')->textInput() ?>
-
-    <?= $form->field($model, 'school_cca_id')->textInput() ?>
 
     <?= $form->field($model, 'avgyearlycost')->textInput() ?>
 

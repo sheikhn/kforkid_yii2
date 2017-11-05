@@ -32,10 +32,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'name',
             'address',
             'contact',
-            'school_infra_id',
             'rating',
-            'school_level_id',
-            'school_syllabus_id',
             'studentratio',
             'teacherratio',
             'classroom',
@@ -48,9 +45,13 @@ $this->params['breadcrumbs'][] = $this->title;
             'teachermaleratio',
             'teacherfemaleratio',
             'minoritystudents',
-            'school_cca_id',
             'avgyearlycost',
         ],
     ]) ?>
 
+    <?= Yii::$app->controller->renderPartial('/schooldetails-cca/index',['school_details_id' => $model->id,'dataProvider'=>$ccaDataProvider,'searchModel'=>$ccaSearchModel,'isDetailView'=>true]); ?>
+
+    <?= Yii::$app->controller->renderPartial('/schooldetails-level/index',['school_details_id' => $model->id,'dataProvider'=>$levelDataProvider,'searchModel'=>$levelSearchModel]); ?>
+    <?= Yii::$app->controller->renderPartial('/schooldetails-infra/index',['school_details_id' => $model->id,'dataProvider'=>$infraDataProvider,'searchModel'=>$infraSearchModel]); ?>
+    <?= Yii::$app->controller->renderPartial('/schooldetails-syllabus/index',['school_details_id' => $model->id,'dataProvider'=>$syllabusDataProvider,'searchModel'=>$syllabusSearchModel]); ?>
 </div>
