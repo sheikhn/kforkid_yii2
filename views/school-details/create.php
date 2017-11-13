@@ -6,7 +6,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\SchoolDetails */
 
-$this->title = 'Create School Details';
+$this->title = 'Fill Up The Following School Details';
 $this->params['breadcrumbs'][] = ['label' => 'School Details', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>

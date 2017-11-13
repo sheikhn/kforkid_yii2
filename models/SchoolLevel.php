@@ -12,6 +12,7 @@ use Yii;
  */
 class SchoolLevel extends \yii\db\ActiveRecord
 {
+    const SCENARIO_CREATE = 'create';
     /**
      * @inheritdoc
      */
@@ -29,6 +30,13 @@ class SchoolLevel extends \yii\db\ActiveRecord
             [['level'], 'required'],
             [['level'], 'string', 'max' => 100],
         ];
+    }
+
+    public function scenarios()
+    {
+        $scenarios = parent::scenarios();
+        $scenarios['create'] = ['level']; 
+        return $scenarios; 
     }
 
     /**

@@ -14,6 +14,7 @@ use Yii;
  */
 class SchoolCca extends \yii\db\ActiveRecord
 {
+     const SCENARIO_CREATE = 'create';
     /**
      * @inheritdoc
      */
@@ -31,6 +32,13 @@ class SchoolCca extends \yii\db\ActiveRecord
             [['name'], 'required'],
             [['name'], 'string', 'max' => 75],
         ];
+    }
+
+    public function scenarios()
+    {
+        $scenarios = parent::scenarios();
+        $scenarios['create'] = ['name']; 
+        return $scenarios; 
     }
 
     /**

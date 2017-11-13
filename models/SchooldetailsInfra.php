@@ -46,7 +46,7 @@ class SchooldetailsInfra extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'school_details_id' => 'School Details',
-            'school_infra_id' => 'School Infra',
+            'school_infra_id' => 'Select the following school infrastructures provided',
         ];
     }
 

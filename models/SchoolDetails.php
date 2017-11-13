@@ -9,8 +9,6 @@ use Yii;
  *
  * @property integer $id
  * @property string $name
- * @property string $address
- * @property integer $contact
  * @property integer $rating
  * @property integer $studentratio
  * @property integer $teacherratio
@@ -47,9 +45,9 @@ class SchoolDetails extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'address', 'contact', 'rating', 'studentratio', 'teacherratio', 'classroom', 'totalstudents', 'playgroundsize', 'campussize', 'sslcfirstclass', 'studentmaleratio', 'studentfemaleratio', 'teachermaleratio', 'teacherfemaleratio', 'minoritystudents', 'avgyearlycost'], 'required'],
-            [['contact', 'rating', 'studentratio', 'teacherratio', 'classroom', 'totalstudents', 'playgroundsize', 'campussize', 'sslcfirstclass', 'studentmaleratio', 'studentfemaleratio', 'teachermaleratio', 'teacherfemaleratio', 'minoritystudents', 'avgyearlycost'], 'integer'],
-            [['name', 'address'], 'string', 'max' => 100],
+            [['name', 'rating', 'studentratio', 'teacherratio', 'classroom', 'totalstudents', 'playgroundsize', 'campussize', 'sslcfirstclass', 'studentmaleratio', 'studentfemaleratio', 'teachermaleratio', 'teacherfemaleratio', 'minoritystudents', 'avgyearlycost'], 'required'],
+            [['rating', 'studentratio', 'teacherratio', 'classroom', 'totalstudents', 'playgroundsize', 'campussize', 'sslcfirstclass', 'studentmaleratio', 'studentfemaleratio', 'teachermaleratio', 'teacherfemaleratio', 'minoritystudents', 'avgyearlycost'], 'integer'],
+            [['name'], 'string', 'max' => 100],
         ];
     }
 
@@ -60,23 +58,21 @@ class SchoolDetails extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => 'Name',
-            'address' => 'Address',
-            'contact' => 'Contact',
-            'rating' => 'Rating',
-            'studentratio' => 'Student Ratio',
-            'teacherratio' => 'Teacher Ratio',
-            'classroom' => 'Classroom',
-            'totalstudents' => 'Total Students',
-            'playgroundsize' => 'Play Ground Size',
-            'campussize' => 'Campus size',
-            'sslcfirstclass' => 'Sslc first class',
-            'studentmaleratio' => 'Student male ratio',
-            'studentfemaleratio' => 'Studentfemaleratio',
-            'teachermaleratio' => 'Teachermaleratio',
-            'teacherfemaleratio' => 'Teacherfemaleratio',
-            'minoritystudents' => 'Minoritystudents',
-            'avgyearlycost' => 'Avgyearlycost',
+            'name' => ' School Name',
+            'rating' => 'School Rating(/10)',
+            'studentratio' => 'Student Ratio (Student-Teacher)',
+            'teacherratio' => 'Teacher Ratio (Student-Teacher)',
+            'classroom' => 'Number of Classrooms',
+            'totalstudents' => 'Total Number of Students',
+            'playgroundsize' => 'School PlayGround Size(Acres)',
+            'campussize' => 'Campus Size(in Acres)',
+            'sslcfirstclass' => 'SSLC First Class(%)',
+            'studentmaleratio' => 'Student Male Ratio(Student)',
+            'studentfemaleratio' => 'Student Female Ratio(Student)',
+            'teachermaleratio' => 'Teacher Male Ratio(Teacher)',
+            'teacherfemaleratio' => 'Teacher Female Ratio(Teacher)',
+            'minoritystudents' => 'Minority Students(%)',
+            'avgyearlycost' => 'Average Yearly Cost(Lakhs)',
         ];
     }
 

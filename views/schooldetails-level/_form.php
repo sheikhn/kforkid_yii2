@@ -24,7 +24,7 @@ $schoolLevels = ArrayHelper::map(SchoolLevel::find()->all(), 'id', 'level');
     <?= $form->field($model, 'school_level_id')->checkboxList($schoolLevels); ?>
 
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::submitButton($model->isNewRecord ? 'Next' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

@@ -30,8 +30,8 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             'id',
             'name',
-            'address',
-            'contact',
+            //'address',
+            //'contact',
             'rating',
             'studentratio',
             'teacherratio',
@@ -49,9 +49,19 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]) ?>
 
-    <?= Yii::$app->controller->renderPartial('/schooldetails-cca/index',['school_details_id' => $model->id,'dataProvider'=>$ccaDataProvider,'searchModel'=>$ccaSearchModel,'isDetailView'=>true]); ?>
+    <?= Yii::$app->controller->renderPartial('/schooldetails-cca/index',
+    [
+    'school_details_id' => $model->id,
+    'dataProvider'=>$ccaDataProvider,
+    'searchModel'=>$ccaSearchModel,
+    'isPartialRender'=>false
+    ]); ?>
 
-    <?= Yii::$app->controller->renderPartial('/schooldetails-level/index',['school_details_id' => $model->id,'dataProvider'=>$levelDataProvider,'searchModel'=>$levelSearchModel]); ?>
-    <?= Yii::$app->controller->renderPartial('/schooldetails-infra/index',['school_details_id' => $model->id,'dataProvider'=>$infraDataProvider,'searchModel'=>$infraSearchModel]); ?>
-    <?= Yii::$app->controller->renderPartial('/schooldetails-syllabus/index',['school_details_id' => $model->id,'dataProvider'=>$syllabusDataProvider,'searchModel'=>$syllabusSearchModel]); ?>
+    <?= Yii::$app->controller->renderPartial('/schooldetails-level/index',['school_details_id' => $model->id,'dataProvider'=>$levelDataProvider,'searchModel'=>$levelSearchModel, 'isPartialRender'=>false]); ?>
+
+    <?= Yii::$app->controller->renderPartial('/schooldetails-infra/index',['school_details_id' => $model->id,'dataProvider'=>$infraDataProvider,'searchModel'=>$infraSearchModel, 'isPartialRender'=>false]); ?>
+    
+    <?= Yii::$app->controller->renderPartial('/schooldetails-syllabus/index',['school_details_id' => $model->id,'dataProvider'=>$syllabusDataProvider,'searchModel'=>$syllabusSearchModel, 'isPartialRender'=>false]); ?>
+
+     <?= Yii::$app->controller->renderPartial('/schooldetails-address/index',['school_details_id' => $model->id,'dataProvider'=>$addressDataProvider,'searchModel'=>$addressSearchModel, 'isPartialRender'=>false]); ?>
 </div>

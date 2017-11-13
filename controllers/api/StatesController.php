@@ -14,30 +14,30 @@ class StatesController extends Controller
     public function beforeAction($action) {
     $this->enableCsrfValidation = false;
     return parent::beforeAction($action);
-}
+    }
 
 	public function actionGetStates()
     {
 
-    \Yii::$app->response->format = \yii\web\Response:: FORMAT_JSON;
+        \Yii::$app->response->format = \yii\web\Response:: FORMAT_JSON;
 
-    $state = States::find()->all();
+        $state = States::find()->all();
 
-    if(count($state) > 0 )
+        if(count($state) > 0 )
 
-    {
+        {
 
-    return array('status' => true, 'data'=> $state);
+        return array('status' => true, 'data'=> $state);
 
-    }
+        }
 
-    else
+        else
 
-    {
+        {
 
-    return array('status'=>false,'data'=> 'No state Found');
+        return array('status'=>false,'data'=> 'No state Found');
 
-    }
+        }
 
     }
 

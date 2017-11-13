@@ -46,8 +46,8 @@ class SchooldetailsLevel extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'school_details_id' => 'School Name',
-            'school_level_id' => 'School Level',
-            'value' => 'Value',
+            'school_level_id' => 'Select the following school levels offered',
+            'value' => 'Value'
         ];
     }
 

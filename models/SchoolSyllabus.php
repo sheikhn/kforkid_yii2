@@ -16,6 +16,7 @@ use Yii;
  */
 class SchoolSyllabus extends \yii\db\ActiveRecord
 {
+    const SCENARIO_CREATE = 'create';
     /**
      * @inheritdoc
      */
@@ -36,6 +37,13 @@ class SchoolSyllabus extends \yii\db\ActiveRecord
             [['state_id'], 'unique'],
             [['state_id'], 'exist', 'skipOnError' => true, 'targetClass' => States::className(), 'targetAttribute' => ['state_id' => 'id']],
         ];
+    }
+
+     public function scenarios()
+    {
+        $scenarios = parent::scenarios();
+        $scenarios['create'] = ['syllabus','state_id']; 
+        return $scenarios; 
     }
 
     /**

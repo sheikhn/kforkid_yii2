@@ -27,9 +27,9 @@ $this->params['breadcrumbs'][] = $this->title;
 
             //'id',
             'name',
-            'address',
-            'contact',
-            //'rating',
+           // 'address',
+           // 'contact',
+            'rating',
             // 'studentratio',
             // 'teacherratio',
             // 'classroom',

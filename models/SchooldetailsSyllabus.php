@@ -46,7 +46,7 @@ class SchooldetailsSyllabus extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'school_details_id' => 'School Details ID',
-            'school_syllabus_id' => 'School Syllabus ID',
+            'school_syllabus_id' => 'Select the following syllabus offered',
             'value' => 'Value',
         ];
     }

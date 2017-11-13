@@ -7,21 +7,21 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\SchooldetailsCcaSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Schooldetails Ccas';
+$this->title = (isset($isPartialRender) && $isPartialRender) ? $schoolName : '';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="schooldetails-cca-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h1><?= Html::encode(strtoupper($this->title)) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Add Schooldetails Cca', ['schooldetails-cca/create', 'school_details_id' => $school_details_id], ['class' => 'btn btn-success']) ?>
-         <?= (!isset($isDetailView) || !$isDetailView) ? Html::a('Create Schooldetails Syllabus', ['/schooldetails-syllabus/create', 'school_details_id' => $school_details_id], ['class' => 'btn btn-success']) : '' ?>
+        <?= Html::a('Edit School Co-Curricular Activities and Extra-Curricular Activites', ['schooldetails-cca/create', 'school_details_id' => $school_details_id], ['class' => 'btn btn-success']) ?>
+         <?= (!isset($isPartialRender) || !$isPartialRender) ? Html::a('Next', ['/schooldetails-syllabus/create', 'school_details_id' => $school_details_id], ['class' => 'btn btn-success']) : '' ?>
     </p>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
+        //'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
             

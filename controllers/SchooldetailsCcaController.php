@@ -40,13 +40,15 @@ class SchooldetailsCcaController extends Controller
         $searchModel->school_details_id = $school_details_id;
 
         $dataProvider = $searchModel->search([]);
+        $schoolDetails = SchoolDetails::findOne($school_details_id);
 
         //var_dump(Yii::$app->request->queryParams)
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
-            'school_details_id' => $school_details_id
+            'school_details_id' => $school_details_id,
+             'schoolName'=> $schoolDetails->name
         ]);
     }
 
@@ -91,7 +93,7 @@ class SchooldetailsCcaController extends Controller
                 }
             }
 
-
+            $schoolDetails = SchoolDetails::findOne($school_details_id);
 
              return $this->redirect(['index', 'id' => $model->id, 'school_details_id' => $school_details_id]);
             
@@ -104,7 +106,7 @@ class SchooldetailsCcaController extends Controller
                 'schoolName'=> $schoolDetails->name
             ]);
         }
-    }
+    }           
 
     /**
      * Updates an existing SchooldetailsCca model.

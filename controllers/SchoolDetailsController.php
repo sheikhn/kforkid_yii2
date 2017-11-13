@@ -4,11 +4,19 @@ namespace app\controllers;
 
 use Yii;
 use app\models\SchoolDetails;
+use app\models\SchooldetailsCca;
+use app\models\SchooldetailsInfra;
+use app\models\SchooldetailsLevel;
+use app\models\SchooldetailsSyllabus;
+use app\models\SchooldetailsAddress;
+
+
+
 use app\models\SchooldetailsCcaSearch;
 use app\models\SchooldetailsInfraSearch;
 use app\models\SchooldetailsLevelSearch;
 use app\models\SchooldetailsSyllabusSearch;
-
+use app\models\SchooldetailsAddressSearch;
 use app\models\SchoolDetailsSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -72,6 +80,9 @@ class SchoolDetailsController extends Controller
         $syllabusSearchModel->school_details_id = $id;
         $syllabusDataProvider = $syllabusSearchModel->search([]);
 
+        $addressSearchModel = new SchooldetailsAddressSearch();
+        $addressSearchModel->school_details_id = $id;
+        $addressDataProvider = $addressSearchModel->search([]);
 
         return $this->render('view', [
             'model' => $this->findModel($id),
@@ -83,6 +94,8 @@ class SchoolDetailsController extends Controller
             'levelDataProvider' => $levelDataProvider,
             'syllabusSearchModel' => $syllabusSearchModel,
             'syllabusDataProvider' => $syllabusDataProvider,
+            'addressSearchModel'=>$addressSearchModel,
+            'addressDataProvider'=>$addressDataProvider,
         ]);
     }
 
@@ -132,7 +145,35 @@ class SchoolDetailsController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+       // $deluser= User::find()->where(['id' => $id])->one();
+
+        $addressModel= SchooldetailsAddress::find()->where(['id'=>$id])->one();
+        $ccaModel= SchooldetailsCca::find()->where(['id'=>$id])->one();
+        $syllabusModel= SchooldetailsSyllabus::find()->where(['id'=>$id])->one();
+        $levelModel= SchooldetailsLevel::find()->where(['id'=>$id])->one();
+        $detailModel= SchoolDetails::find()->where(['id'=>$id])->one();
+        $infraModel= SchooldetailsInfra::find()->where(['id'=>$id])->one();
+
+
+        $connection = Yii::$app->db;
+        $transaction = $connection->beginTransaction();
+        try {
+                $addressModel->delete();
+                $ccaModel->delete();
+                $syllabusModel->delete();
+                $levelModel->delete();
+                $detailModel->delete();
+                $infraModel->delete();
+                // ... executing other SQL statements ...
+                $transaction->commit();
+        } catch(\Exception $e) {
+                $transaction->rollBack();
+                throw $e;
+        }
+
+
+
+
 
         return $this->redirect(['index']);
     }

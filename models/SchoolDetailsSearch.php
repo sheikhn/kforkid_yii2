@@ -18,8 +18,8 @@ class SchoolDetailsSearch extends SchoolDetails
     public function rules()
     {
         return [
-            [['id', 'contact', 'rating', 'studentratio', 'teacherratio', 'classroom', 'totalstudents', 'playgroundsize', 'campussize', 'sslcfirstclass', 'studentmaleratio', 'studentfemaleratio', 'teachermaleratio', 'teacherfemaleratio', 'minoritystudents', 'avgyearlycost'], 'integer'],
-            [['name', 'address'], 'safe'],
+            [['id', 'rating', 'studentratio', 'teacherratio', 'classroom', 'totalstudents', 'playgroundsize', 'campussize', 'sslcfirstclass', 'studentmaleratio', 'studentfemaleratio', 'teachermaleratio', 'teacherfemaleratio', 'minoritystudents', 'avgyearlycost'], 'integer'],
+            [['name'], 'safe'],
         ];
     }
 
@@ -60,7 +60,6 @@ class SchoolDetailsSearch extends SchoolDetails
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'contact' => $this->contact,
             'rating' => $this->rating,
             'studentratio' => $this->studentratio,
             'teacherratio' => $this->teacherratio,
@@ -77,8 +76,7 @@ class SchoolDetailsSearch extends SchoolDetails
             'avgyearlycost' => $this->avgyearlycost,
         ]);
 
-        $query->andFilterWhere(['like', 'name', $this->name])
-            ->andFilterWhere(['like', 'address', $this->address]);
+        $query->andFilterWhere(['like', 'name', $this->name]);
 
         return $dataProvider;
     }

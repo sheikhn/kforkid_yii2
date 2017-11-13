@@ -39,11 +39,13 @@ class SchooldetailsInfraController extends Controller
         $searchModel = new SchooldetailsInfraSearch();
         $searchModel->school_details_id = $school_details_id;
         $dataProvider = $searchModel->search([]);
+        $schoolDetails = SchoolDetails::findOne($school_details_id);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
-            'school_details_id' => $school_details_id
+            'school_details_id' => $school_details_id,
+            'schoolName'=> $schoolDetails->name
         ]);
     }
 

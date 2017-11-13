@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use Yii;    
+use app\models\SchoolDetails;
 use app\models\SchooldetailsSyllabus;
 use app\models\SchooldetailsSyllabusSearch;
 use yii\web\Controller;
@@ -38,11 +39,13 @@ class SchooldetailsSyllabusController extends Controller
         $searchModel = new SchooldetailsSyllabusSearch();
         $searchModel->school_details_id = $school_details_id;
         $dataProvider = $searchModel->search([]);
+         $schoolDetails = SchoolDetails::findOne($school_details_id);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
-            'school_details_id' => $school_details_id
+            'school_details_id' => $school_details_id,
+            'schoolName'=> $schoolDetails->name
         ]);
     }
 
@@ -88,8 +91,10 @@ class SchooldetailsSyllabusController extends Controller
            
         } else {
              $model = new SchooldetailsSyllabus();
+             $schoolDetails = SchoolDetails::findOne($school_details_id);
             return $this->render('create', [
                 'model' => $model,
+                'schoolName'=> $schoolDetails->name
             ]);
         }
     }

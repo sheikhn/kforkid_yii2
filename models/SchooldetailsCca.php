@@ -46,7 +46,7 @@ class SchooldetailsCca extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'school_details_id' => 'School Details ID',
-            'school_cca_id' => 'School Cca ID',
+            'school_cca_id' => 'Select the following school Co-Curricular Activities and Extra-Curricular Activites',
             'value' => 'Value',
         ];
     }
