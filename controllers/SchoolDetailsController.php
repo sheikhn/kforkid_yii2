@@ -146,24 +146,31 @@ class SchoolDetailsController extends Controller
     public function actionDelete($id)
     {
        // $deluser= User::find()->where(['id' => $id])->one();
+        $detailsModel = $this->findModel($id);
+         $addressModel = new SchooldetailsAddress();
+         $ccaModel = new SchooldetailsCca();
+         $syllabusModel = new SchooldetailsSyllabus();
+         $levelModel = new SchooldetailsLevel();
+         $infraModel = new SchooldetailsInfra();
 
-        $addressModel= SchooldetailsAddress::find()->where(['id'=>$id])->one();
-        $ccaModel= SchooldetailsCca::find()->where(['id'=>$id])->one();
-        $syllabusModel= SchooldetailsSyllabus::find()->where(['id'=>$id])->one();
-        $levelModel= SchooldetailsLevel::find()->where(['id'=>$id])->one();
-        $detailModel= SchoolDetails::find()->where(['id'=>$id])->one();
-        $infraModel= SchooldetailsInfra::find()->where(['id'=>$id])->one();
+        $addressModel=$addressModel::findOne(['school_details_id' => $id]);
+        $ccaModel=$ccaModel::findOne(['school_details_id' => $id]);
+        $syllabusModel=$syllabusModel::findOne(['school_details_id' => $id]); 
+        $levelModel=$levelModel::findOne(['school_details_id' => $id]);
+        $infraModel=$infraModel::findOne(['school_details_id' => $id]);
 
-
+        
         $connection = Yii::$app->db;
         $transaction = $connection->beginTransaction();
         try {
+                $detailsModel->delete();
                 $addressModel->delete();
-                $ccaModel->delete();
+                
                 $syllabusModel->delete();
                 $levelModel->delete();
                 $detailModel->delete();
                 $infraModel->delete();
+                $ccaModel->delete();
                 // ... executing other SQL statements ...
                 $transaction->commit();
         } catch(\Exception $e) {
@@ -193,4 +200,5 @@ class SchoolDetailsController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
+
 }

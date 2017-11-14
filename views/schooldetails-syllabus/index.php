@@ -7,6 +7,8 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\SchooldetailsSyllabusSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
+var_dump(isset($isPartialRender));
+
 $this->title = (isset($isPartialRender) && $isPartialRender) ? $schoolName : '';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -17,7 +19,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <p>
         <?= Html::a('Create Schooldetails Syllabus', ['create', 'school_details_id' => $school_details_id], ['class' => 'btn btn-success']) ?>
-        <?= (!isset($isDetailView)) ? Html::a('Create Schooldetails address', ['/schooldetails-address/create', 'school_details_id' => $school_details_id], ['class' => 'btn btn-success']) : 'qwe' ?>
+        <?= (!isset($isDetailView) || !$isDetailView) ? Html::a('Create Schooldetails address', ['/schooldetails-address/create', 'school_details_id' => $school_details_id], ['class' => 'btn btn-success']) : 'qwe' ?>
     </p>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,

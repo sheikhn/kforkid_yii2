@@ -6,6 +6,9 @@ use yii\grid\GridView;
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\SchooldetailsAddressSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
+echo isset($isPartialRender);
+var_dump(isset($isPartialRender));
+
 
 $this->title = (isset($isPartialRender) && $isPartialRender) ? $schoolName : '';
 $this->params['breadcrumbs'][] = $this->title;
