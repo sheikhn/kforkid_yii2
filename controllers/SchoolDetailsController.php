@@ -145,33 +145,48 @@ class SchoolDetailsController extends Controller
      */
     public function actionDelete($id)
     {
-       // $deluser= User::find()->where(['id' => $id])->one();
-        $detailsModel = $this->findModel($id);
-         $addressModel = new SchooldetailsAddress();
-         $ccaModel = new SchooldetailsCca();
-         $syllabusModel = new SchooldetailsSyllabus();
-         $levelModel = new SchooldetailsLevel();
-         $infraModel = new SchooldetailsInfra();
+        $modal = $this->findModel($id);
 
-        $addressModel=$addressModel::findOne(['school_details_id' => $id]);
-        $ccaModel=$ccaModel::findOne(['school_details_id' => $id]);
-        $syllabusModel=$syllabusModel::findOne(['school_details_id' => $id]); 
-        $levelModel=$levelModel::findOne(['school_details_id' => $id]);
-        $infraModel=$infraModel::findOne(['school_details_id' => $id]);
+
+
+        $ccas = $modal->schooldetailsCcas;
+        $addresses = $modal->schooldetailsAddresses;
+        $infras = $modal->schooldetailsInfras;
+        $levels = $modal->schooldetailsLevels;
+        $syllabi = $modal->schooldetailsSyllabi;
 
         
         $connection = Yii::$app->db;
         $transaction = $connection->beginTransaction();
         try {
-                $detailsModel->delete();
-                $addressModel->delete();
-                
-                $syllabusModel->delete();
-                $levelModel->delete();
-                $detailModel->delete();
-                $infraModel->delete();
-                $ccaModel->delete();
-                // ... executing other SQL statements ...
+                //cca delete
+                foreach ($ccas as $cca) {
+                    $cca->delete();
+                }
+
+                //address delete
+                foreach ($addresses as $address) {
+                    $address->delete();
+                 }
+
+                 //infras delete
+                 foreach ($infras as $infra) {
+                      $infra->delete();
+                 }
+
+               //levels delete
+                foreach ($levels as $level) {
+                    $level->delete();
+                 }
+
+                //syllabi delete
+               foreach ($syllabi as $syllabus) {
+                    $syllabus->delete();
+                }
+
+
+                $modal->delete();
+
                 $transaction->commit();
         } catch(\Exception $e) {
                 $transaction->rollBack();

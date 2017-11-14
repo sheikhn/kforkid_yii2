@@ -18,6 +18,8 @@ use Yii;
  * @property integer $Pincode
  * @property string $City
  * @property string $State
+ *
+ * @property SchoolDetails $schoolDetails
  */
 class SchooldetailsAddress extends \yii\db\ActiveRecord
 {
@@ -38,6 +40,7 @@ class SchooldetailsAddress extends \yii\db\ActiveRecord
             [['school_details_id', 'Address_Line_1', 'Landline_Number', 'Cell_Number', 'Pincode', 'City', 'State'], 'required'],
             [['school_details_id', 'Landline_Number', 'Alternative_Landline_Number', 'Cell_Number', 'Alternative_Cell_Number', 'Pincode'], 'integer'],
             [['Address_Line_1', 'Address_Line_2', 'City', 'State'], 'string', 'max' => 100],
+            [['school_details_id'], 'exist', 'skipOnError' => true, 'targetClass' => SchoolDetails::className(), 'targetAttribute' => ['school_details_id' => 'id']],
         ];
     }
 
@@ -59,5 +62,13 @@ class SchooldetailsAddress extends \yii\db\ActiveRecord
             'City' => 'City',
             'State' => 'State',
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getSchoolDetails()
+    {
+        return $this->hasOne(SchoolDetails::className(), ['id' => 'school_details_id']);
     }
 }

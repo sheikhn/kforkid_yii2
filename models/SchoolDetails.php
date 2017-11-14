@@ -24,6 +24,7 @@ use Yii;
  * @property integer $minoritystudents
  * @property integer $avgyearlycost
  *
+ * @property SchooldetailsAddress[] $schooldetailsAddresses
  * @property SchooldetailsCca[] $schooldetailsCcas
  * @property SchooldetailsInfra[] $schooldetailsInfras
  * @property SchooldetailsLevel[] $schooldetailsLevels
@@ -58,22 +59,30 @@ class SchoolDetails extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => ' School Name',
-            'rating' => 'School Rating(/10)',
-            'studentratio' => 'Student Ratio (Student-Teacher)',
-            'teacherratio' => 'Teacher Ratio (Student-Teacher)',
-            'classroom' => 'Number of Classrooms',
-            'totalstudents' => 'Total Number of Students',
-            'playgroundsize' => 'School PlayGround Size(Acres)',
-            'campussize' => 'Campus Size(in Acres)',
-            'sslcfirstclass' => 'SSLC First Class(%)',
-            'studentmaleratio' => 'Student Male Ratio(Student)',
-            'studentfemaleratio' => 'Student Female Ratio(Student)',
-            'teachermaleratio' => 'Teacher Male Ratio(Teacher)',
-            'teacherfemaleratio' => 'Teacher Female Ratio(Teacher)',
-            'minoritystudents' => 'Minority Students(%)',
-            'avgyearlycost' => 'Average Yearly Cost(Lakhs)',
+            'name' => 'Name',
+            'rating' => 'Rating',
+            'studentratio' => 'Studentratio',
+            'teacherratio' => 'Teacherratio',
+            'classroom' => 'Classroom',
+            'totalstudents' => 'Totalstudents',
+            'playgroundsize' => 'Playgroundsize',
+            'campussize' => 'Campussize',
+            'sslcfirstclass' => 'Sslcfirstclass',
+            'studentmaleratio' => 'Studentmaleratio',
+            'studentfemaleratio' => 'Studentfemaleratio',
+            'teachermaleratio' => 'Teachermaleratio',
+            'teacherfemaleratio' => 'Teacherfemaleratio',
+            'minoritystudents' => 'Minoritystudents',
+            'avgyearlycost' => 'Avgyearlycost',
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getSchooldetailsAddresses()
+    {
+        return $this->hasMany(SchooldetailsAddress::className(), ['school_details_id' => 'id']);
     }
 
     /**
