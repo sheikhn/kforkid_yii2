@@ -147,16 +147,13 @@ class SchoolDetailsController extends Controller
     {
         $modal = $this->findModel($id);
 
-
-
         $ccas = $modal->schooldetailsCcas;
         $addresses = $modal->schooldetailsAddresses;
         $infras = $modal->schooldetailsInfras;
         $levels = $modal->schooldetailsLevels;
         $syllabi = $modal->schooldetailsSyllabi;
 
-        
-        $connection = Yii::$app->db;
+
         $transaction = $connection->beginTransaction();
         try {
                 //cca delete
@@ -192,9 +189,6 @@ class SchoolDetailsController extends Controller
                 $transaction->rollBack();
                 throw $e;
         }
-
-
-
 
 
         return $this->redirect(['index']);

@@ -85,6 +85,8 @@ class SchoolDetails extends \yii\db\ActiveRecord
         return $this->hasMany(SchooldetailsAddress::className(), ['school_details_id' => 'id']);
     }
 
+
+
     /**
      * @return \yii\db\ActiveQuery
      */
@@ -92,6 +94,7 @@ class SchoolDetails extends \yii\db\ActiveRecord
     {
         return $this->hasMany(SchooldetailsCca::className(), ['school_details_id' => 'id']);
     }
+
 
     /**
      * @return \yii\db\ActiveQuery
@@ -101,6 +104,8 @@ class SchoolDetails extends \yii\db\ActiveRecord
         return $this->hasMany(SchooldetailsInfra::className(), ['school_details_id' => 'id']);
     }
 
+
+
     /**
      * @return \yii\db\ActiveQuery
      */
@@ -109,6 +114,7 @@ class SchoolDetails extends \yii\db\ActiveRecord
         return $this->hasMany(SchooldetailsLevel::className(), ['school_details_id' => 'id']);
     }
 
+
     /**
      * @return \yii\db\ActiveQuery
      */
@@ -116,4 +122,34 @@ class SchoolDetails extends \yii\db\ActiveRecord
     {
         return $this->hasMany(SchooldetailsSyllabus::className(), ['school_details_id' => 'id']);
     }
+
+
+
+
+public function getAddressesAsArray()
+            {
+                return $this->hasMany(SchooldetailsAddress::className(), ['school_details_id' => 'id'])->asArray()->all();
+            }
+
+ public function getCCasAsArray()
+                        {
+                            return $this->hasMany(SchooldetailsCca::className(), ['school_details_id' => 'id'])->asArray()->all();
+                        }
+
+ public function getInfrasAsArray()
+                {
+                    return $this->hasMany(SchooldetailsInfra::className(), ['school_details_id' => 'id'])->asArray()->all();
+                }
+
+ public function getLevelsAsArray()
+                {
+                    return $this->hasMany(SchooldetailsLevel::className(), ['school_details_id' => 'id'])->asArray()->all();
+                }
+
+
+
+    public function getSyllabiAsArray()
+                {
+                    return $this->hasMany(SchooldetailsSyllabus::className(), ['school_details_id' => 'id'])->asArray()->all();
+                }
 }
