@@ -18,16 +18,37 @@ class SchoolController extends Controller
 
     public function actionGetSchools()
     {
+        $schoolsQuery = SchoolDetails::find();
+        //use Filter params in where conditions
+        $getParams = Yii::$app->request->get();
+        //If there are any query params, i.e filters
+        if (sizeof($getParams)) {
+            if (array_key_exists('cca', $getParams)) {
+               $schoolsQuery->leftJoin('schooldetails_cca', '`schooldetails_cca`.`school_details_id` = `school_details`.`id`');
+               $schoolsQuery->andWhere(['schooldetails_cca.school_cca_id' => $getParams['cca']]);
 
-        \Yii::$app->response->format = \yii\web\Response:: FORMAT_JSON;
+            }
+            if (array_key_exists('level', $getParams)) {
+               $schoolsQuery->leftJoin('schooldetails_level', '`schooldetails_level`.`school_details_id` = `school_details`.`id`');
+               $schoolsQuery->andWhere(['schooldetails_level.school_level_id' => $getParams['level']]);
+            }
+            if (array_key_exists('syllabus', $getParams)) {
+               $schoolsQuery->leftJoin('schooldetails_syllabus', '`schooldetails_syllabus`.`school_details_id` = `school_details`.`id`');
+               $schoolsQuery->andWhere(['schooldetails_syllabus.school_syllabus_id' => $getParams['syllabus']]);
+            }
+            if (array_key_exists('infra', $getParams)) {
+               $schoolsQuery->leftJoin('schooldetails_infra', '`schooldetails_infra`.`school_details_id` = `school_details`.`id`');
+               $schoolsQuery->andWhere(['schooldetails_infra.school_infra_id' => $getParams['infra']]);
 
-        $schoolList= [];
-        //Get all schools as Array
-        $schools = SchoolDetails::find()->asArray()->all();
+            }
+        }
+        //var_dump($schoolsQuery);
+        $schools = $schoolsQuery->asArray()->all();
         //$schools contains the array of all schools details. array of arrays
 
-        foreach ($schools as $school){
-            //$school is the array of once school
+        $schoolList= [];
+        foreach ($schools as $school) {
+            //$school is the array of one school
             //get Model from id
             $schoolDetails = SchoolDetails::find()->where(['id'=>$school['id']])->one();
             
@@ -40,10 +61,9 @@ class SchoolController extends Controller
             $school['levels'] = $schoolDetails->getLevelsAsArray();
             $school['syllabus'] = $schoolDetails->getSyllabiAsArray();
             array_push($schoolList, $school);
-            var_dump($schoolList);
-            exit();
         }
 
+        \Yii::$app->response->format = \yii\web\Response:: FORMAT_JSON;
 
         return array('status'=>true,'data'=> $schoolList);
 
