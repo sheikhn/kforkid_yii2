@@ -12,8 +12,8 @@ use yii\filters\VerbFilter;
 class SchoolController extends Controller
 {
 	public function beforeAction($action) {
-    $this->enableCsrfValidation = false;
-    return parent::beforeAction($action);
+        $this->enableCsrfValidation = false;
+        return parent::beforeAction($action);
     }
 
     public function actionGetSchools()
@@ -55,21 +55,23 @@ class SchoolController extends Controller
 
         \Yii::$app->response->format = \yii\web\Response:: FORMAT_JSON;
 
-        $schoolList= [];
-        //Get all schools as Array
-        $schoolDetails = SchoolDetails::find()->where(['id'=>$id])->one();
-        //$schools contains the array of all schools details. array of arrays
-        
-        
-        $schools['details']=SchoolDetails::find()->asArray()->one();
-        $schools['address'] = $schoolDetails->getAddressesAsArray();
-            $schools['cca'] = $schoolDetails->getCCasAsArray();
-            $schools['infra'] = $schoolDetails->getInfrasAsArray();
-            $schools['levels'] = $schoolDetails->getLevelsAsArray();
-            $schools['syllabus'] = $schoolDetails->getSyllabiAsArray();
-            array_push($schoolList, $schools);
+        $schoolArray= [];
 
-        return array('status'=>true,'data'=> $schoolList);
+        //Gets schoolDetails Modal
+        $schoolDetails = SchoolDetails::find()->where(['id'=>$id])->one();
+        //GEts school details modal as an Array
+        $school = SchoolDetails::find()->where(['id'=>$id])->asArray()->one();
+
+
+        
+        $schoolArray['details']= $school;
+        $schoolArray['address'] = $schoolDetails->getAddressesAsArray();
+        $schoolArray['cca'] = $schoolDetails->getCCasAsArray();
+        $schoolArray['infra'] = $schoolDetails->getInfrasAsArray();
+        $schoolArray['levels'] = $schoolDetails->getLevelsAsArray();
+        $schoolArray['syllabus'] = $schoolDetails->getSyllabiAsArray();
+
+        return array('status'=>true,'data'=> $schoolArray);
 
     }
 
