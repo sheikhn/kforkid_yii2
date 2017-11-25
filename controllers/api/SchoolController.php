@@ -42,7 +42,9 @@ class SchoolController extends Controller
 
             }
         }
-        //var_dump($schoolsQuery);
+        //var_dump($schoolsQuery->createCommand()->getRawSql());
+        //exit();
+
         $schools = $schoolsQuery->asArray()->all();
         //$schools contains the array of all schools details. array of arrays
 

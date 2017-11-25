@@ -153,7 +153,7 @@ class SchoolDetailsController extends Controller
         $levels = $modal->schooldetailsLevels;
         $syllabi = $modal->schooldetailsSyllabi;
 
-
+        $connection = Yii::$app->db;
         $transaction = $connection->beginTransaction();
         try {
                 //cca delete

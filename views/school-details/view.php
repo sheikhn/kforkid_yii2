@@ -55,7 +55,7 @@ $this->params['breadcrumbs'][] = $this->title;
     'dataProvider'=>$ccaDataProvider,
     'searchModel'=>$ccaSearchModel,
     'isPartialRender'=>false
-    ]); ?>
+    ]); ?>  
 
     <?= Yii::$app->controller->renderPartial('/schooldetails-level/index',['school_details_id' => $model->id,'dataProvider'=>$levelDataProvider,'searchModel'=>$levelSearchModel, 'isPartialRender'=>false]); ?>
 
