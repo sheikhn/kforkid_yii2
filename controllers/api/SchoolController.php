@@ -18,11 +18,19 @@ class SchoolController extends Controller
 
     public function actionGetSchools()
     {
+
+
         $schoolsQuery = SchoolDetails::find();
         //use Filter params in where conditions
         $getParams = Yii::$app->request->get();
+
         //If there are any query params, i.e filters
         if (sizeof($getParams)) {
+           if (array_key_exists('id', $getParams)) {
+               $schoolsQuery->andWhere(['id' => $getParams['id']]);
+
+            }
+
             if (array_key_exists('cca', $getParams)) {
                $schoolsQuery->leftJoin('schooldetails_cca', '`schooldetails_cca`.`school_details_id` = `school_details`.`id`');
                $schoolsQuery->andWhere(['schooldetails_cca.school_cca_id' => $getParams['cca']]);
@@ -42,8 +50,8 @@ class SchoolController extends Controller
 
             }
         }
-        //var_dump($schoolsQuery->createCommand()->getRawSql());
-        //exit();
+       // var_dump($schoolsQuery->createCommand()->getRawSql());
+       // exit();
 
         $schools = $schoolsQuery->asArray()->all();
         //$schools contains the array of all schools details. array of arrays
