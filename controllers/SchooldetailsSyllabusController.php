@@ -41,6 +41,7 @@ class SchooldetailsSyllabusController extends Controller
         $dataProvider = $searchModel->search([]);
          $schoolDetails = SchoolDetails::findOne($school_details_id);
 
+         
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,

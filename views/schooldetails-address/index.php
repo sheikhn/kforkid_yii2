@@ -6,11 +6,10 @@ use yii\grid\GridView;
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\SchooldetailsAddressSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
-echo isset($isPartialRender);
-var_dump(isset($isPartialRender));
 
 
-$this->title = (isset($isPartialRender) && $isPartialRender) ? $schoolName : '';
+
+$this->title = (!isset($isPartialRender) || !$isPartialRender) ? $schoolName : '';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="schooldetails-address-index">
@@ -19,9 +18,17 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create Schooldetails Address', ['schooldetails-address/create','school_details_id'=>$school_details_id], ['class' => 'btn btn-success']) ?>
 
-        <?= Html::a('View  Schooldetails', ['/school-details/view', 'id' => $school_details_id], ['class' => 'btn btn-success']) ?>
+
+        <?= Html::a('Edit Schooldetails Address', ['schooldetails-address/create','school_details_id'=>$school_details_id], ['class' => 'btn btn-success']) ?>
+
+        <?php if(!isset($isPartialRender) || !$isPartialRender){
+                    echo Html::a('View  Schooldetails', ['/school-details/view', 'id' => $school_details_id], ['class' => 'btn btn-success']);
+               }else{
+
+                }   ?>
+
+
     </p>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -34,14 +41,8 @@ $this->params['breadcrumbs'][] = $this->title;
             'Address_Line_1',
             'Address_Line_2',
             'Landline_Number',
-            // 'Alternative_Landline_Number',
-            // 'Cell_Number',
-            // 'Alternative_Cell_Number',
-            // 'Pincode',
-            // 'City',
-            // 'State',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            ['class' => 'yii\grid\ActionColumn','template'=>'{delete}'],
         ],
     ]); ?>
 </div>

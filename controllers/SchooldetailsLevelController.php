@@ -40,7 +40,8 @@ class SchooldetailsLevelController extends Controller
         $searchModel->school_details_id = $school_details_id;
         $dataProvider = $searchModel->search([]);
          $schoolDetails = SchoolDetails::findOne($school_details_id);
-
+         //var_dump($schoolDetails->name);
+         //exit();
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,

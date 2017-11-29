@@ -21,7 +21,7 @@ $schoolSyllabusList = ArrayHelper::map(SchoolSyllabus::find()->all(), 'id', 'syl
      <?= $form->field($model, 'school_syllabus_id')->checkboxList($schoolSyllabusList); ?>
 
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Add' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::submitButton($model->isNewRecord ? 'Next' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

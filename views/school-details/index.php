@@ -21,7 +21,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
+       // 'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
@@ -44,7 +44,8 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'minoritystudents',
             // 'avgyearlycost',
 
-            ['class' => 'yii\grid\ActionColumn'],
+             ['class' => 'yii\grid\ActionColumn','template'=>'{delete}'],
+             ['class' => 'yii\grid\ActionColumn','template'=>'{view}'],
         ],
     ]); ?>
 </div>

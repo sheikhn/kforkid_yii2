@@ -39,11 +39,13 @@ class SchooldetailsAddressController extends Controller
         $searchModel = new SchooldetailsAddressSearch();
          $searchModel->school_details_id = $school_details_id;
         $dataProvider = $searchModel->search([]);
+        $schoolDetails = SchoolDetails::findOne($school_details_id);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
             'school_details_id'=>$school_details_id,
+            'schoolName'=> $schoolDetails->name
         ]);
     }
 
@@ -74,6 +76,7 @@ class SchooldetailsAddressController extends Controller
         if (Yii::$app->request->post()) {
              $postData = Yii::$app->request->post();
                 $model = new SchooldetailsAddress();
+
              if (!$model::findOne(['school_details_id' => $school_details_id])) 
              { 
                 
@@ -95,6 +98,7 @@ class SchooldetailsAddressController extends Controller
         } else {
 
             $model= new SchooldetailsAddress();
+           
             $schoolDetails = SchoolDetails::findOne($school_details_id);
             return $this->render('create', [
                 'model' => $model,

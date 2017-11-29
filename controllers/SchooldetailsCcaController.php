@@ -116,6 +116,8 @@ class SchooldetailsCcaController extends Controller
      * @param integer $school_cca_id
      * @return mixed
      */
+
+    
     public function actionUpdate($id, $school_details_id, $school_cca_id)
     {
         $model = $this->findModel($id, $school_details_id, $school_cca_id);

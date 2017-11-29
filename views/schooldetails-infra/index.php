@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\SchooldetailsInfraSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = (isset($isPartialRender) && $isPartialRender) ? $schoolName : '';
+$this->title = (!isset($isPartialRender) || !$isPartialRender) ? $schoolName : '';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="schooldetails-infra-index">
@@ -16,8 +16,16 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Edit School Infrastructures', ['create', 'school_details_id' => $school_details_id], ['class' => 'btn btn-success']) ?>
-        <?= Html::a('Next', ['/schooldetails-cca/create', 'school_details_id' => $school_details_id], ['class' => 'btn btn-success']) ?>
+
+        <?= Html::a('Edit School Infrastructures', ['schooldetails-infra/create', 'school_details_id' => $school_details_id], ['class' => 'btn btn-success']) ?>
+
+        <?php if(!isset($isPartialRender) || !$isPartialRender){
+                    echo Html::a('Next', ['/schooldetails-cca/create', 'school_details_id' => $school_details_id], ['class' => 'btn btn-success']);
+               }else{
+
+                } ?>
+
+       
     </p>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,

@@ -105,5 +105,28 @@ class SchoolController extends Controller
 
     }
 
+    public function actionGetSchoolByName($name){
+        \Yii::$app->response->format = \yii\web\Response:: FORMAT_JSON;
+
+         $schoolDetails = SchoolDetails::find()->select(['name'])->where(['LIKE', 'name', $name.'%', false])->asArray()->all();
+
+         return array('status'=>true,'data'=> $schoolDetails);
+    }
+
+    public function actionGetSchoolByCity($city){
+        \Yii::$app->response->format = \yii\web\Response:: FORMAT_JSON;
+
+         $schoolDetails = SchoolDetails::find()->leftJoin('schooldetails_address', '`schooldetails_address`.`school_details_id` = `school_details`.`id`')->select(['name'])->where(['LIKE', 'city', $city.'%', false])->asArray()->all();   
+
+         return array('status'=>true,'data'=> $schoolDetails);
+    }
+
+     public function actionGetSchoolByPincode($pincode){
+        \Yii::$app->response->format = \yii\web\Response:: FORMAT_JSON;
+
+         $schoolDetails = SchoolDetails::find()->leftJoin('schooldetails_address', '`schooldetails_address`.`school_details_id` = `school_details`.`id`')->select(['name'])->where(['LIKE', 'Pincode', $pincode.'%', false])->asArray()->all();   
+
+         return array('status'=>true,'data'=> $schoolDetails);
+    }
 
 }

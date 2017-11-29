@@ -129,7 +129,7 @@ class SchoolDetailsController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['/schooldetails-level/index', 'school_details_id' => $model->id]);
+            return $this->redirect(['/schooldetails-cca/index', 'school_details_id' => $model->id]);
         } else {
             return $this->render('update', [
                 'model' => $model,

@@ -7,17 +7,24 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\SchooldetailsLevelSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = (isset($isPartialRender) && $isPartialRender) ? $schoolName : '';
+$this->title = (!isset($isPartialRender) || !$isPartialRender) ? $schoolName : '';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="schooldetails-level-index">
 
     <h1><?= Html::encode(strtoupper($this->title)) ?></h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Edit School Levels', ['create', 'school_details_id' => $school_details_id], ['class' => 'btn btn-success']) ?>
-        <?= Html::a('Next', ['/schooldetails-infra/create', 'school_details_id' => $school_details_id], ['class' => 'btn btn-success']) ?>
+
+        <?= Html::a('Edit School Levels', ['schooldetails-level/create', 'school_details_id' => $school_details_id], ['class' => 'btn btn-success']) ?>
+
+
+         <?php if(!isset($isPartialRender) || !$isPartialRender){
+                echo Html::a('Next', ['/schooldetails-infra/create', 'school_details_id' => $school_details_id], ['class' => 'btn btn-success']);
+                }else{
+
+                } ?>
+      
     </p>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
