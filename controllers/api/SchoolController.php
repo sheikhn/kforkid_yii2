@@ -28,7 +28,6 @@ class SchoolController extends Controller
         if (sizeof($getParams)) {
            if (array_key_exists('id', $getParams)) {
                $schoolsQuery->andWhere(['id' => $getParams['id']]);
-
             }
 
             if (array_key_exists('cca', $getParams)) {
@@ -47,8 +46,23 @@ class SchoolController extends Controller
             if (array_key_exists('infra', $getParams)) {
                $schoolsQuery->leftJoin('schooldetails_infra', '`schooldetails_infra`.`school_details_id` = `school_details`.`id`');
                $schoolsQuery->andWhere(['schooldetails_infra.school_infra_id' => $getParams['infra']]);
-
             }
+
+            if(array_key_exists('name', $getParams)) {
+                $schoolsQuery->andWhere(['like', 'name', $getParams['name']]);
+            }
+
+            if(array_key_exists('city', $getParams)) {
+                $schoolsQuery->leftJoin('schooldetails_address', '`schooldetails_address`.`school_details_id` = `school_details`.`id`');
+                $schoolsQuery->andWhere(['like', 'schooldetails_address.city', $getParams['city']]);
+            }
+
+            if(array_key_exists('pincode', $getParams)) {
+                $schoolsQuery->leftJoin('schooldetails_address', '`schooldetails_address`.`school_details_id` = `school_details`.`id`');
+                $schoolsQuery->andWhere(['like', 'schooldetails_address.pincode', $getParams['pincode']]);
+            }
+
+
         }
        // var_dump($schoolsQuery->createCommand()->getRawSql());
        // exit();
