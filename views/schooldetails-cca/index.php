@@ -15,7 +15,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode(strtoupper($this->title)) ?></h1>
 
     <p>
-        <?= Html::a('Edit School Co-Curricular Activities and Extra-Curricular Activites', ['schooldetails-cca/create', 'school_details_id' => $school_details_id], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Add School Co-Curricular Activities and Extra-Curricular Activites', ['schooldetails-cca/create', 'school_details_id' => $school_details_id], ['class' => 'btn btn-success']) ?>
 
         <?php if(!isset($isPartialRender) || !$isPartialRender){
             echo Html::a('Next', ['/schooldetails-syllabus/create', 'school_details_id' => $school_details_id], ['class' => 'btn btn-success']);

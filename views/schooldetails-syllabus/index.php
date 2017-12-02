@@ -18,7 +18,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <p>
 
-        <?= Html::a('Edit School Syllabus', ['schooldetails-syllabus/create', 'school_details_id' => $school_details_id], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Add School Syllabus', ['schooldetails-syllabus/create', 'school_details_id' => $school_details_id], ['class' => 'btn btn-success']) ?>
 
        
 

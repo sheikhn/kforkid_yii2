@@ -17,7 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <p>
 
-        <?= Html::a('Edit School Infrastructures', ['schooldetails-infra/create', 'school_details_id' => $school_details_id], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Add School Infrastructures', ['schooldetails-infra/create', 'school_details_id' => $school_details_id], ['class' => 'btn btn-success']) ?>
 
         <?php if(!isset($isPartialRender) || !$isPartialRender){
                     echo Html::a('Next', ['/schooldetails-cca/create', 'school_details_id' => $school_details_id], ['class' => 'btn btn-success']);

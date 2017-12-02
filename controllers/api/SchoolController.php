@@ -18,6 +18,7 @@ class SchoolController extends Controller
 
 	public function actionGetSchools()
 	{        
+        \Yii::$app->response->format = \yii\web\Response:: FORMAT_JSON;
         //use Filter params in where conditions
 		$getParams = Yii::$app->request->get();
 
@@ -43,11 +44,34 @@ class SchoolController extends Controller
 				array_push($schoolList, $school);
 			}
 
-			\Yii::$app->response->format = \yii\web\Response:: FORMAT_JSON;
+			
 
 			return array('status'=>true,'data'=> $schoolList);
 		} else {
-			return array('status'=>false,'msg'=> 'where are the filters?');
+
+            $schoolsQuery = SchoolDetails::find();
+
+            $schools = $schoolsQuery->asArray()->all();
+            //$schools contains the array of all schools details. array of arrays
+            $schoolList= [];
+            foreach ($schools as $school) {
+                //$school is the array of one school
+                //get Model from id
+                $schoolDetails = SchoolDetails::find()->where(['id'=>$school['id']])->one();
+                
+                //After you get the model using relations get all data in array format
+                //from the custom functions we created
+                $school['address'] = $schoolDetails->getAddressesAsArray();
+                $school['cca'] = $schoolDetails->getCCasAsArray();
+                $school['infra'] = $schoolDetails->getInfrasAsArray();
+                $school['levels'] = $schoolDetails->getLevelsAsArray();
+                $school['syllabus'] = $schoolDetails->getSyllabiAsArray();
+                array_push($schoolList, $school);
+            }
+            \Yii::$app->response->format = \yii\web\Response:: FORMAT_JSON;
+            return array('status'=>true,'data'=> $schoolList);
+
+			
 		}
 
 	}

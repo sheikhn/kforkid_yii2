@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <p>
 
-        <?= Html::a('Edit School Levels', ['schooldetails-level/create', 'school_details_id' => $school_details_id], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Add School Levels', ['schooldetails-level/create', 'school_details_id' => $school_details_id], ['class' => 'btn btn-success']) ?>
 
 
          <?php if(!isset($isPartialRender) || !$isPartialRender){

@@ -20,7 +20,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <p>
 
 
-        <?= Html::a('Edit Schooldetails Address', ['schooldetails-address/create','school_details_id'=>$school_details_id], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Add Schooldetails Address', ['schooldetails-address/create','school_details_id'=>$school_details_id], ['class' => 'btn btn-success']) ?>
 
         <?php if(!isset($isPartialRender) || !$isPartialRender){
                     echo Html::a('View  Schooldetails', ['/school-details/view', 'id' => $school_details_id], ['class' => 'btn btn-success']);
@@ -43,6 +43,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'Landline_Number',
 
             ['class' => 'yii\grid\ActionColumn','template'=>'{delete}'],
+            ['class' => 'yii\grid\ActionColumn','template'=>'{update}'],
         ],
     ]); ?>
 </div>
