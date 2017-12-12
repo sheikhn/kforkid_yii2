@@ -76,7 +76,7 @@ class SchooldetailsLevelController extends Controller
             $postData = Yii::$app->request->post();
             //var_dump($postData['SchooldetailsLevel']);
             foreach ($postData['SchooldetailsLevel']['school_level_id'] as $key => $value) {
-                
+
                 $model = new SchooldetailsLevel();
 
                 if (!$model::findOne(['school_details_id' => $school_details_id, 'school_level_id' => (int)$value])) {

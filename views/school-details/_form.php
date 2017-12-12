@@ -81,78 +81,27 @@ $schoolSyllabusList = ArrayHelper::map(SchoolSyllabus::find()->all(), 'id', 'syl
     <?= $form->field($model, 'avgyearlycost')->textInput() ?>
     </div>
     </div>
-    <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Next' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
-    </div>
 
-    <?php ActiveForm::end(); ?>
 
-</div>
 
-<div class="schooldetails-level-form">
 
-    <?php $form = ActiveForm::begin(); ?>
 
-    
 
     <?= $form->field($modellevel, 'school_level_id')->checkboxList($schoolLevels); ?>
 
-    <div class="form-group">
-        <?= Html::submitButton($modellevel->isNewRecord ? 'Next' : 'Update', ['class' => $modellevel->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
-    </div>
-
-    <?php ActiveForm::end(); ?>
-
-</div>
-
-<div class="schooldetails-cca-form">
-
-    <?php $form = ActiveForm::begin(); ?>
 
     <?= $form->field($modelcca, 'school_cca_id')->checkboxList($schoolCcaList); ?>
 
-
-    <div class="form-group">
-        <?= Html::submitButton($modelcca->isNewRecord ? 'Add' : 'Update', ['class' => $modelcca->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
-    </div>
-
-    <?php ActiveForm::end(); ?>
-
-</div>
-
-<div class="schooldetails-infra-form">
-
-    <?php $form = ActiveForm::begin(); ?>
 
 
     <?= $form->field($modelinfra, 'school_infra_id')->checkboxList($schoolInfraList); ?>
 
 
-    <div class="form-group">
-        <?= Html::submitButton($modelinfra->isNewRecord ? 'Add' : 'Update', ['class' => $modelinfra->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
-    </div>
-
-    <?php ActiveForm::end(); ?>
-
-</div>
-
-<div class="schooldetails-syllabus-form">
-
-    <?php $form = ActiveForm::begin(); ?>
 
      <?= $form->field($modelsyllabus, 'school_syllabus_id')->checkboxList($schoolSyllabusList); ?>
 
-    <div class="form-group">
-        <?= Html::submitButton($modelsyllabus->isNewRecord ? 'Next' : 'Update', ['class' => $modelsyllabus->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
-    </div>
 
-    <?php ActiveForm::end(); ?>
 
-</div>
-
-<div class="schooldetails-address-form">
-
-    <?php $form = ActiveForm::begin(); ?>
 
     <div class="row">
     <div class="col-md-6">
@@ -189,10 +138,12 @@ $schoolSyllabusList = ArrayHelper::map(SchoolSyllabus::find()->all(), 'id', 'syl
     <?= $form->field($modeladdress, 'State')->textInput(['maxlength' => true]) ?>
     </div>
     </div>
-    <div class="form-group">
-        <?= Html::submitButton($modeladdress->isNewRecord ? 'Create' : 'Update', ['class' => $modeladdress->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
-    </div>
+<div class="form-group">
+            <?= Html::submitButton('Create' , ['class' => 'btn btn-primary']) ?>
+        </div>
+
 
     <?php ActiveForm::end(); ?>
+
 
 </div>

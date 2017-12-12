@@ -106,16 +106,53 @@ class SchoolDetailsController extends Controller
      */
     public function actionCreate()
     {
+
         $model = new SchoolDetails();
         $modellevel = new SchooldetailsLevel();
         $modelcca = new SchooldetailsCca();
         $modelinfra = new SchooldetailsInfra();
         $modelsyllabus = new SchooldetailsSyllabus();
         $modeladdress = new SchooldetailsAddress();
-            
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-                return $this->redirect(['/schooldetails-level/create', 'school_details_id' => $model->id ]);
-            //return $this->redirect(['view', 'id' => $model->id]);
+
+
+        if (Yii::$app->request->post()) {
+
+        $transaction = Yii::$app->db->beginTransaction();
+
+         if ($model->load(Yii::$app->request->post()) && $modellevel->load(Yii::$app->request->post())
+             && $modelcca->load(Yii::$app->request->post()) && $modelinfra->load(Yii::$app->request->post())
+             && $modelsyllabus->load(Yii::$app->request->post()) && $modeladdress->load(Yii::$app->request->post())) {
+
+
+                   try  {
+
+                           $model->save();
+                           $modellevel->school_details_id = $model->id;
+                           $modelcca->school_details_id = $model->id;
+                           $modelinfra->school_details_id = $model->id;
+                           $modelsyllabus->school_details_id = $model->id;
+                           $modeladdress->school_details_id = $model->id;
+
+
+                           SchooldetailsLevel::saveFromPost($school_details_id, Yii::$app->request->post());
+                           SchooldetailsCca::saveFromPost($school_details_id, Yii::$app->request->post());
+                           SchooldetailsInfra::saveFromPost($school_details_id, Yii::$app->request->post());
+                           SchooldetailsSyllabus::saveFromPost($school_details_id, Yii::$app->request->post());
+                           SchooldetailsAddress::saveFromPost($school_details_id,Yii::$app->request->post());
+
+                            Yii::warning('asdsadssdasdasasdsadsadasdasdasdsadasdasdasdasdasdasdasdas');
+                            Yii::warning($modelcca->errors);
+                           $transaction->commit();
+
+
+                   } catch (Exception $e) {
+                       $transaction->rollBack();
+                   }
+         } else {
+             $transaction->rollBack();
+         }
+
+         return $this->redirect(['view', 'id' => $model->id ]);
         } else {
             return $this->render('create', [
                 'model' => $model,

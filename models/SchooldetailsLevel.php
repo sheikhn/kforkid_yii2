@@ -66,4 +66,24 @@ class SchooldetailsLevel extends \yii\db\ActiveRecord
     {
         return $this->hasOne(SchoolLevel::className(), ['id' => 'school_level_id']);
     }
+
+    public static function saveFromPost($school_details_id, $post)
+        {
+        try {
+                foreach ($post['SchooldetailsLevel']['school_level_id'] as $key => $value) {
+
+                    $model = new SchooldetailsLevel();
+
+                    if (!$model::findOne(['school_details_id' => $school_details_id, 'school_level_id' => (int)$value])) {
+                    $model->school_details_id = $school_details_id;
+                    $model->school_level_id = (int)$value;
+                    $model->save();
+                    }
+                }
+         } catch(Exception $e) {
+            //throw
+         }
+
+                return true
+        }
 }
