@@ -59,8 +59,8 @@ class SchoolDetails extends \yii\db\ActiveRecord
     {
     	return [
     		'id' => 'ID',
-    		'name' => 'Name',
-    		'rating' => 'Rating',
+    		'name' => ' School Name',
+    		'rating' => 'School Rating',
     		'studentratio' => 'Studentratio',
     		'teacherratio' => 'Teacherratio',
     		'classroom' => 'Classroom',

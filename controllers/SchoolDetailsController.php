@@ -107,6 +107,11 @@ class SchoolDetailsController extends Controller
     public function actionCreate()
     {
         $model = new SchoolDetails();
+        $modellevel = new SchooldetailsLevel();
+        $modelcca = new SchooldetailsCca();
+        $modelinfra = new SchooldetailsInfra();
+        $modelsyllabus = new SchooldetailsSyllabus();
+        $modeladdress = new SchooldetailsAddress();
             
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
                 return $this->redirect(['/schooldetails-level/create', 'school_details_id' => $model->id ]);
@@ -114,6 +119,11 @@ class SchoolDetailsController extends Controller
         } else {
             return $this->render('create', [
                 'model' => $model,
+                'modellevel' => $modellevel,
+                'modelcca' => $modelcca,
+                'modelinfra' => $modelinfra,
+                'modelsyllabus' => $modelsyllabus,
+                'modeladdress' => $modeladdress,
             ]);
         }
     }
