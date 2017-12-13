@@ -66,4 +66,24 @@ class SchooldetailsSyllabus extends \yii\db\ActiveRecord
     {
         return $this->hasOne(SchoolSyllabus::className(), ['id' => 'school_syllabus_id']);
     }
+
+    public static function saveFromPost($school_details_id, $post)
+    {
+        try {
+                foreach ($post['SchooldetailsSyllabus']['school_syllabus_id'] as $key => $value) {
+                
+                   $model = new SchooldetailsSyllabus();
+                    //checking if already exists
+                    if (!$model::findOne(['school_details_id' => $school_details_id, 'school_syllabus_id' => (int)$value])) {
+                        $model->school_details_id = $school_details_id;
+                        $model->school_syllabus_id = (int)$value;
+                        $model->save();
+                    }
+                }
+         } catch(Exception $e) {
+            return $this->render('error', ['exception' => $e]);
+         }
+
+                return true;
+    }
 }

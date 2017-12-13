@@ -65,4 +65,24 @@ class SchooldetailsInfra extends \yii\db\ActiveRecord
     {
         return $this->hasOne(SchoolInfra::className(), ['id' => 'school_infra_id']);
     }
+
+    public static function saveFromPost($school_details_id, $post)
+    {
+        try {
+                foreach ($post['SchooldetailsInfra']['school_infra_id'] as $key => $value) {
+                
+                $model = new SchooldetailsInfra();
+                //checking if already exists
+                if (!$model::findOne(['school_details_id' => $school_details_id, 'school_infra_id' => (int)$value])) {
+                    $model->school_details_id = $school_details_id;
+                    $model->school_infra_id = (int)$value;
+                    $model->save();
+                }
+                }
+         } catch(Exception $e) {
+            return $this->render('error', ['exception' => $e]);
+         }
+
+                return true;
+    }
 }

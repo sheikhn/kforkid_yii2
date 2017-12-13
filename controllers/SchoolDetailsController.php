@@ -133,6 +133,7 @@ class SchoolDetailsController extends Controller
                            $modelsyllabus->school_details_id = $model->id;
                            $modeladdress->school_details_id = $model->id;
 
+                           $school_details_id = $model->id;
 
                            SchooldetailsLevel::saveFromPost($school_details_id, Yii::$app->request->post());
                            SchooldetailsCca::saveFromPost($school_details_id, Yii::$app->request->post());
@@ -140,8 +141,6 @@ class SchoolDetailsController extends Controller
                            SchooldetailsSyllabus::saveFromPost($school_details_id, Yii::$app->request->post());
                            SchooldetailsAddress::saveFromPost($school_details_id,Yii::$app->request->post());
 
-                            Yii::warning('asdsadssdasdasasdsadsadasdasdasdsadasdasdasdasdasdasdasdas');
-                            Yii::warning($modelcca->errors);
                            $transaction->commit();
 
 
@@ -174,12 +173,22 @@ class SchoolDetailsController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $modellevel = new SchooldetailsLevel();
+        $modelcca = new SchooldetailsCca();
+        $modelinfra = new SchooldetailsInfra();
+        $modelsyllabus = new SchooldetailsSyllabus();
+        $modeladdress = new SchooldetailsAddress();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['/schooldetails-cca/index', 'school_details_id' => $model->id]);
         } else {
             return $this->render('update', [
                 'model' => $model,
+                'modellevel' => $modellevel,
+                'modelcca' => $modelcca,
+                'modelinfra' => $modelinfra,
+                'modelsyllabus' => $modelsyllabus,
+                'modeladdress' => $modeladdress,
             ]);
         }
     }

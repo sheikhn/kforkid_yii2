@@ -66,4 +66,29 @@ class SchooldetailsCca extends \yii\db\ActiveRecord
     {
         return $this->hasOne(SchoolCca::className(), ['id' => 'school_cca_id']);
     }
+
+    public static function saveFromPost($school_details_id, $post)
+    {
+        try {
+                
+            foreach ($post['SchooldetailsCca']['school_cca_id'] as $key => $value) {
+                
+
+                $model = new SchooldetailsCca();
+                //checking if already exists
+                if (!$model::findOne(['school_details_id' => $school_details_id, 'school_cca_id' => (int)$value])) {
+
+                    $model->school_details_id = $school_details_id;
+                    $model->school_cca_id = (int)$value;
+                    $id=$model->save();
+
+                }
+            }
+         } catch(Exception $e) {
+            return $this->render('error', ['exception' => $e]);
+         }
+
+                return true;
+    }
+
 }

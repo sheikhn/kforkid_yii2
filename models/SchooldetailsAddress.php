@@ -71,4 +71,33 @@ class SchooldetailsAddress extends \yii\db\ActiveRecord
     {
         return $this->hasOne(SchoolDetails::className(), ['id' => 'school_details_id']);
     }
+
+    public static function saveFromPost($school_details_id, $post)
+    {
+        try {
+                 $model = new SchooldetailsAddress();
+
+            if (!$model::findOne(['school_details_id' => $school_details_id])) 
+             { 
+                
+                $model->Address_Line_1=$post['SchooldetailsAddress']['Address_Line_1'];
+                $model->Address_Line_2=$post['SchooldetailsAddress']['Address_Line_2'];
+                $model->Landline_Number=(int)$post['SchooldetailsAddress']['Landline_Number'];
+            $model->Alternative_Landline_Number=(int)$post['SchooldetailsAddress']['Alternative_Landline_Number'];
+                $model->Cell_Number=(int)$post['SchooldetailsAddress']['Cell_Number'];
+                $model->Alternative_Cell_Number=(int)$post['SchooldetailsAddress']['Alternative_Cell_Number'];
+                $model->Pincode=(int)$post['SchooldetailsAddress']['Pincode'];
+                $model->City=$post['SchooldetailsAddress']['City'];
+                $model->State=$post['SchooldetailsAddress']['State'];
+                //var_dump($model);
+                //exit();
+                $model->school_details_id = $school_details_id;
+                $model->save();
+              }
+         } catch(Exception $e) {
+            return $this->render('error', ['exception' => $e]);
+         }
+
+                return true;
+    }
 }

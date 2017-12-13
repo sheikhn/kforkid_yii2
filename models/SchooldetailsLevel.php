@@ -68,7 +68,7 @@ class SchooldetailsLevel extends \yii\db\ActiveRecord
     }
 
     public static function saveFromPost($school_details_id, $post)
-        {
+    {
         try {
                 foreach ($post['SchooldetailsLevel']['school_level_id'] as $key => $value) {
 
@@ -81,9 +81,9 @@ class SchooldetailsLevel extends \yii\db\ActiveRecord
                     }
                 }
          } catch(Exception $e) {
-            //throw
+            return $this->render('error', ['exception' => $e]);
          }
 
-                return true
-        }
+                return true;
+    }
 }
