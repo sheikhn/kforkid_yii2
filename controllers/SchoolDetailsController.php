@@ -178,7 +178,7 @@ class SchoolDetailsController extends Controller
         $modelcca = new SchooldetailsCca();
         $modelinfra = new SchooldetailsInfra();
         $modelsyllabus = new SchooldetailsSyllabus();
-        $modeladdress = new SchooldetailsAddress();
+        $modeladdress = $model->schooldetailsAddress;
 
 
         //Filling the empty model with db data to auto fill the form

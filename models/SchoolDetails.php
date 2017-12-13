@@ -80,9 +80,9 @@ class SchoolDetails extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getSchooldetailsAddresses()
+    public function getSchooldetailsAddress()
     {
-    	return $this->hasMany(SchooldetailsAddress::className(), ['school_details_id' => 'id']);
+    	return $this->hasOne(SchooldetailsAddress::className(), ['school_details_id' => 'id']);
     }
 
 
