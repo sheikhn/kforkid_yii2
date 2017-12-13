@@ -179,6 +179,21 @@ class SchoolDetailsController extends Controller
         $modelsyllabus = new SchooldetailsSyllabus();
         $modeladdress = new SchooldetailsAddress();
 
+
+        $schoolLevelsArray = [];
+
+        foreach ($model->schooldetailsLevels as $schoolLevel) {
+            array_push($schoolLevelsArray, $schoolLevel->school_level_id);
+        }
+        $modellevel->school_level_id = $schoolLevelsArray;
+
+        $schoolCcasArray = [];
+
+        foreach ($model->schooldetailsCcas as $schoolCca) {
+            array_push($schoolCcasArray, $schoolCca->school_cca_id);
+        }
+        $modelcca->school_cca_id = $schoolCcasArray;
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['/schooldetails-cca/index', 'school_details_id' => $model->id]);
         } else {
