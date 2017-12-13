@@ -173,6 +173,7 @@ class SchoolDetailsController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        //empty models form
         $modellevel = new SchooldetailsLevel();
         $modelcca = new SchooldetailsCca();
         $modelinfra = new SchooldetailsInfra();
@@ -180,6 +181,7 @@ class SchoolDetailsController extends Controller
         $modeladdress = new SchooldetailsAddress();
 
 
+        //Filling the empty model with db data to auto fill the form
         $schoolLevelsArray = [];
 
         foreach ($model->schooldetailsLevels as $schoolLevel) {
