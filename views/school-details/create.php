@@ -7,8 +7,9 @@ use yii\helpers\Html;
 /* @var $model app\models\SchoolDetails */
 
 $this->title = 'Fill Up The Following School Details';
-$this->params['breadcrumbs'][] = ['label' => 'School Details', 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
+//$this->params['breadcrumbs'][] = ['label' => 'School Details', 'url' => ['index']];
+//$this->params['breadcrumbs'][] = $this->title;
+
 ?>
 <div class="school-details-create">
 
@@ -21,6 +22,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'modelinfra' => $modelinfra,
         'modelsyllabus' => $modelsyllabus,
         'modeladdress' => $modeladdress,
+        'flag' => true,
     ]) ?>
 
 </div>

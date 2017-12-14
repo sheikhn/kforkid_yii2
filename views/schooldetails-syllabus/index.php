@@ -18,7 +18,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <p>
 
-        <?= Html::a('Add School Syllabus', ['schooldetails-syllabus/create', 'school_details_id' => $school_details_id], ['class' => 'btn btn-success']) ?>
+        <!--<?= Html::a('Add School Syllabus', ['schooldetails-syllabus/create', 'school_details_id' => $school_details_id], ['class' => 'btn btn-success']) ?>-->
 
        
 
@@ -28,20 +28,34 @@ $this->params['breadcrumbs'][] = $this->title;
 
                     }   ?>
     </p>
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-       // 'filterModel' => $searchModel,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+    
 
-            [
-             'attribute' => 'school_syllabus_syllabus',
-             'value'=>function ($model, $key, $index, $column) {
-                return $model->schoolSyllabus->syllabus;
-                }
-             ],
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#accordion" href="#collapseSix"><span class="glyphicon glyphicon-plus"></span> View School Syllabus</a>
+            </h4>
+        </div>
+        <div id="collapseSix" class="panel-collapse collapse">
+            <div class="panel-body">
+                 <?= GridView::widget([
+                        'dataProvider' => $dataProvider,
+                       // 'filterModel' => $searchModel,
+                        'columns' => [
+                            ['class' => 'yii\grid\SerialColumn'],
 
-            ['class' => 'yii\grid\ActionColumn','template'=>'{delete}'],
-        ],
-    ]); ?>
+                            [
+                             'attribute' => 'school_syllabus_syllabus',
+                             'value'=>function ($model, $key, $index, $column) {
+                                return $model->schoolSyllabus->syllabus;
+                                }
+                             ],
+
+                            ['class' => 'yii\grid\ActionColumn','template'=>'{delete}'],
+                        ],
+                    ]); 
+                ?>
+            </div>
+        </div>
+    </div>
 </div>

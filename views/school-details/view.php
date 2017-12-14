@@ -15,7 +15,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Edit', ['update', 'id' => $model->id], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-success']) ?>
        <!--  <?= Html::a('Delete', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
@@ -25,29 +25,44 @@ $this->params['breadcrumbs'][] = $this->title;
         ]) ?> -->
     </p>
 
-    <?= DetailView::widget([
-        'model' => $model,
-        'attributes' => [
-            'id',
-            'name',
-            //'address',
-            //'contact',
-            'rating',
-            'studentratio',
-            'teacherratio',
-            'classroom',
-            'totalstudents',
-            'playgroundsize',
-            'campussize',
-            'sslcfirstclass',
-            'studentmaleratio',
-            'studentfemaleratio',
-            'teachermaleratio',
-            'teacherfemaleratio',
-            'minoritystudents',
-            'avgyearlycost',
-        ],
-    ]) ?>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne"><span class="glyphicon glyphicon-plus"></span> View School Statistics Details</a>
+            </h4>
+        </div>
+        <div id="collapseOne" class="panel-collapse collapse in">
+            <div class="panel-body">
+                <?= DetailView::widget([
+                        'model' => $model,
+                        'attributes' => [
+                            'id',
+                            'name',
+                            //'address',
+                            //'contact',
+                            'rating',
+                            'studentratio',
+                            'teacherratio',
+                            'classroom',
+                            'totalstudents',
+                            'playgroundsize',
+                            'campussize',
+                            'sslcfirstclass',
+                            'studentmaleratio',
+                            'studentfemaleratio',
+                            'teachermaleratio',
+                            'teacherfemaleratio',
+                            'minoritystudents',
+                            'avgyearlycost',
+                        ],
+                    ]) 
+                ?>
+            </div>
+        </div>
+    </div>
+
+    
 
     <?= Yii::$app->controller->renderPartial('/schooldetails-cca/index',
     [
