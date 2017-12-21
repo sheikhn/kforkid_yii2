@@ -51,6 +51,15 @@ class SchooldetailsLevel extends \yii\db\ActiveRecord
         ];
     }
 
+    public function fields()
+    {
+        return [
+            'level_name'=> function () {
+                return $this->schoolLevel->level;
+            },
+        ];
+    }
+
     /**
      * @return \yii\db\ActiveQuery
      */

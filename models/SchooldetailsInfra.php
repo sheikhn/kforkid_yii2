@@ -50,6 +50,15 @@ class SchooldetailsInfra extends \yii\db\ActiveRecord
         ];
     }
 
+    public function fields()
+    {
+        return [
+            'infra_name'=> function () {
+                return $this->schoolInfra->name;
+            },
+        ];
+    }
+
     /**
      * @return \yii\db\ActiveQuery
      */

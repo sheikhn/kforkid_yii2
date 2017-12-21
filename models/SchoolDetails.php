@@ -123,32 +123,57 @@ class SchoolDetails extends \yii\db\ActiveRecord
     	return $this->hasMany(SchooldetailsSyllabus::className(), ['school_details_id' => 'id']);
     }
 
+
+
+
+
     public function getAddressesAsArray()
     {
-    	return $this->hasMany(SchooldetailsAddress::className(), ['school_details_id' => 'id'])->asArray()->all();
+
+        return $this->schooldetailsAddress->toArray();
     }
 
     public function getCCasAsArray()
     {
-    	return $this->hasMany(SchooldetailsCca::className(), ['school_details_id' => 'id'])->asArray()->all();
+        $ccaArray = [];
+        foreach ($this->schooldetailsCcas as $schooldetailCca){
+            array_push($ccaArray, $schooldetailCca->toArray());
+        }
+        return $ccaArray;
     }
 
     public function getInfrasAsArray()
     {
-    	return $this->hasMany(SchooldetailsInfra::className(), ['school_details_id' => 'id'])->asArray()->all();
+
+        $infraArray = [];
+        foreach ($this->schooldetailsInfras as $schooldetailsInfra){
+            array_push($infraArray, $schooldetailsInfra->toArray());
+        }
+        return $infraArray;
     }
 
     public function getLevelsAsArray()
     {
-    	return $this->hasMany(SchooldetailsLevel::className(), ['school_details_id' => 'id'])->asArray()->all();
+         $levelsArray = [];
+        foreach ($this->schooldetailsLevels as $schooldetailsLevel){
+            array_push($levelsArray, $schooldetailsLevel->toArray());
+        }
+        return $levelsArray;
     }
 
 
 
     public function getSyllabiAsArray()
     {
-    	return $this->hasMany(SchooldetailsSyllabus::className(), ['school_details_id' => 'id'])->asArray()->all();
+        $syllabusArray = [];
+        foreach ($this->schooldetailsSyllabi as $schooldetailsSyllabus){
+            array_push($syllabusArray, $schooldetailsSyllabus->toArray());
+        }
+        return $syllabusArray;
     }
+
+
+
 
     public static function findSchoolsForFilter($filter)
     {

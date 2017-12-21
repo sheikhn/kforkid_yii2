@@ -51,6 +51,15 @@ class SchooldetailsCca extends \yii\db\ActiveRecord
         ];
     }
 
+    public function fields()
+    {
+        return [
+            'cca_name'=> function () {
+                return $this->schoolCca->name;
+            },
+        ];
+    }
+
     /**
      * @return \yii\db\ActiveQuery
      */

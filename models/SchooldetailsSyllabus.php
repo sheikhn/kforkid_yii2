@@ -51,6 +51,15 @@ class SchooldetailsSyllabus extends \yii\db\ActiveRecord
         ];
     }
 
+    public function fields()
+    {
+        return [
+            'syllabus_name'=> function () {
+                return $this->schoolSyllabus->syllabus;
+            },
+        ];
+    }
+
     /**
      * @return \yii\db\ActiveQuery
      */
