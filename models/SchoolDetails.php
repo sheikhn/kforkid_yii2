@@ -130,7 +130,7 @@ class SchoolDetails extends \yii\db\ActiveRecord
     public function getAddressesAsArray()
     {
 
-        return $this->schooldetailsAddress->toArray();
+        return $this->schooldetailsAddress ? $this->schooldetailsAddress->toArray() : [];
     }
 
     public function getCCasAsArray()
